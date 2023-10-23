@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Farcas_Razvan_Lab2_incercareaNR2Context"
+    }
+  }
+}
