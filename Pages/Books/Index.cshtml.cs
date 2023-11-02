@@ -27,6 +27,7 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Books
             {
                 Book = await _context.Book
                     .Include(b => b.Publisher)
+                    .Include(b => b.Author)
                     .ToListAsync();
             }
         }

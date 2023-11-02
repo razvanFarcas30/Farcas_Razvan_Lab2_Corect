@@ -23,9 +23,9 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Books
         {
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
                "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
-               "AuthorName");
-            return Page();
+			ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
+               "FullName");
+			return Page();
         }
 
         [BindProperty]
