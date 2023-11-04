@@ -19,5 +19,7 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Data
         public DbSet<Farcas_Razvan_Lab2_incercareaNR2.Models.Publisher>? Publisher { get; set; }
 
         public DbSet<Farcas_Razvan_Lab2_incercareaNR2.Models.Author>? Author { get; set; }
+
+        public DbSet<Farcas_Razvan_Lab2_incercareaNR2.Models.Category>? Category { get; set; }
     }
 }
