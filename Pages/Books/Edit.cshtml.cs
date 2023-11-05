@@ -25,22 +25,22 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Books
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Book == null)
             {
                 return NotFound();
             }
-            //se va include Author conform cu sarcina de la lab 2
+
             Book = await _context.Book
-            .Include(b => b.Publisher)
-            .Include(b => b.BookCategories).ThenInclude(b => b.Category)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == id);
+  .Include(b => b.Publisher)
+  .Include(b => b.BookCategories).ThenInclude(b => b.Category)
+  .AsNoTracking()
+  .FirstOrDefaultAsync(m => m.ID == id);
             if (Book == null)
             {
                 return NotFound();
             }
             //apelam PopulateAssignedCategoryData pentru o obtine informatiile necesare checkbox-
-            //urilor folosind clasa AssignedCategoryData
+            //urilor folosind clasa AssignedCategoryData 
             PopulateAssignedCategoryData(_context, Book);
             var authorList = _context.Author.Select(x => new
             {
@@ -49,12 +49,9 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Books
             });
             ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
             ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
-           "PublisherName");
+            "PublisherName");
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? id, string[]
 selectedCategories)
         {
@@ -76,7 +73,7 @@ selectedCategories)
             if (await TryUpdateModelAsync<Book>(
             bookToUpdate,
             "Book",
-            i => i.Title, i => i.Author,
+            i => i.Title, i => i.AuthorID,
             i => i.Price, i => i.PublishingDate, i => i.PublisherID))
             {
                 UpdateBookCategories(_context, selectedCategories, bookToUpdate);
@@ -90,6 +87,7 @@ selectedCategories)
             return Page();
         }
 
-        
+
+
     }
 }

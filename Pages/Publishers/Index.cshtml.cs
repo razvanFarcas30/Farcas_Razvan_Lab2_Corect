@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Farcas_Razvan_Lab2_incercareaNR2.Data;
 using Farcas_Razvan_Lab2_incercareaNR2.Models;
+using Farcas_Razvan_Lab2_incercareaNR2.Models.ViewModels;
+using System.Security.Policy;
+using Publisher = Farcas_Razvan_Lab2_incercareaNR2.Models.Publisher;
 
 namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Publishers
 {
@@ -18,15 +21,26 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Publishers
         {
             _context = context;
         }
-
-        public IList<Publisher> Publisher { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public IList<Publisher> Publisher { get; set; } = default!;
+        public PublisherIndexData PublisherData { get; set; }
+        public int PublisherID { get; set; }
+        public int BookID { get; set; }
+        public async Task OnGetAsync(int? id, int? bookID)
         {
-            if (_context.Publisher != null)
+            PublisherData = new PublisherIndexData();
+            PublisherData.Publishers = await _context.Publisher
+            .Include(i => i.Books)
+            .ThenInclude(c => c.Author)
+            .OrderBy(i => i.PublisherName)
+            .ToListAsync();
+            if (id != null)
             {
-                Publisher = await _context.Publisher.ToListAsync();
+                PublisherID = id.Value;
+                Publisher publisher = PublisherData.Publishers
+                .Where(i => i.ID == id.Value).Single();
+                PublisherData.Books = publisher.Books;
             }
         }
+
     }
 }
