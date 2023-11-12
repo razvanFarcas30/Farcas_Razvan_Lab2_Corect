@@ -31,8 +31,11 @@
     <tbody>
 @foreach (var item in Model.Borrowing) {
         <tr>
+            
+             
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Member.FullName)
+                @Html.DisplayFor(modelItem => item.Member.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Book.Borrowing.Book.Title)

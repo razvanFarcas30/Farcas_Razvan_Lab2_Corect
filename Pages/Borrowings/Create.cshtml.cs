@@ -23,15 +23,15 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Borrowings
         public IActionResult OnGet()
         {
             var bookList = _context.Book
- .Include(b => b.Author)
- .Select(x => new
+            .Include(b => b.Author)
+            .Select(x => new
  {
      x.ID,
      BookFullName = x.Title + " - " + x.Author.LastName + " " +
 x.Author.FirstName
  });
             ViewData["BookID"] = new SelectList(bookList, "ID", "BookFullName");
-        ViewData["Member Name"] = new SelectList(_context.Member, "ID", "FullName");
+        ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
 

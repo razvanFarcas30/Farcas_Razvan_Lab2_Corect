@@ -36,7 +36,23 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Borrowings
                 return NotFound();
             }
             Borrowing = borrowing;
-           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
+            var bookList = new List<object>();
+            if (borrowing.Book != null)
+            {
+                bookList.Add(new
+                {
+                    borrowing.Book.ID,
+                    BookFullName = borrowing.Book.Title + " - " + borrowing.Book.Author.LastName + " " + borrowing.Book.Author.FirstName
+                });
+            }
+            //var bookList = _context.Book
+            //     .Include(b => b.Author)
+            //    .Select(x => new
+            //   {
+            //      x.ID,
+            //     BookFullName = x.Title + " - " + x.Author.LastName + " " + x.Author.FirstName
+            //});
+            ViewData["BookID"] = new SelectList(_context.Book, "ID", "BookFullName");
            ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
