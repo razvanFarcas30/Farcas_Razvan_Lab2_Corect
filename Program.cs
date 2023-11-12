@@ -12,7 +12,7 @@ builder.Services.AddDbContext<Farcas_Razvan_Lab2_incercareaNR2Context>(options =
 
 builder.Services.AddDbContext<LibraryIdentityContext>(options =>
 
-options.UseSqlServer(builder.Configuration.GetConnectionString("Farcas_Razvan_Lab2_incercareaNR2Context") ?? throw new InvalidOperationException("Connection string 'Farcas_Razvan_Lab2_incercareaNR2Context' not found.")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryIdentityContextConnection") ?? throw new InvalidOperationException("Connection string 'LibraryIdentityContextConnection' not found.")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 options.SignIn.RequireConfirmedAccount = true)
  .AddEntityFrameworkStores<LibraryIdentityContext>();
