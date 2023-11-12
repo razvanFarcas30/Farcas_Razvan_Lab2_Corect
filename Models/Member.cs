@@ -12,13 +12,8 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Models
         public string Email { get; set; }
         public string? Phone { get; set; }
         [Display(Name = "Full Name")]
-        public string? FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
+        public string? FullName => $"{FirstName} {LastName}";
+        
         public ICollection<Borrowing>? Borrowings { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace Farcas_Razvan_Lab2_incercareaNR2.Pages.Borrowings
 x.Author.FirstName
  });
             ViewData["BookID"] = new SelectList(bookList, "ID", "BookFullName");
-        ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
+        ViewData["Member Name"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
 
